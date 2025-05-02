@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Loop</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+        <h1 class="text-2xl font-bold mb-4">Enter a number to get its multiplication table:</h1>
+        <input type="number" id="userInput" class="border border-gray-300 p-2 rounded mb-4" />
+        <button onclick="getInput()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+        <p id="output" class="mt-4 text-left"></p>
+    </div>
+
+    <script>
+        function getInput() {
+            let input = document.getElementById('userInput').value;
+            let output = document.getElementById('output');
+            let number = parseInt(input);
+
+            if (isNaN(number)) {
+                output.innerHTML = `<span class="text-red-500">Please enter a valid number.</span>`;
+                return;
+            }
+
+            if (number < 0) {
+                output.innerHTML = `<span class="text-red-500">Stopped taking input.</span>`;
+                document.getElementById('userInput').disabled = true;
+            } else {
+                let result = `<br>Multiplication table for ${number}:<br>`;
+                for (let i = 1; i <= 10; i++) {
+                    result += `${number} x ${i} = ${number * i}<br>`;
+                }
+                output.innerHTML = result;
+            }
+
+            document.getElementById('userInput').value = '';
+        }
+    </script>
+</body>
+</html>
